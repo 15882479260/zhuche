@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="io.renren.modules.generator.dao.CarDao">
+
+	<!-- 可根据自己的需求，是否要使用 -->
+    <resultMap type="io.renren.modules.generator.entity.CarEntity" id="carMap">
+        <result property="id" column="ID"/>
+        <result property="carlicencenum" column="CarLicenceNum"/>
+        <result property="vehicleid" column="VehicleID"/>
+        <result property="framenum" column="FrameNum"/>
+        <result property="enginenum" column="EngineNum"/>
+        <result property="cityid" column="CityID"/>
+        <result property="storeid" column="StoreID"/>
+        <result property="carcurrentstatus" column="CarCurrentStatus"/>
+        <result property="insurancedays" column="InsuranceDays"/>
+        <result property="currentmileage" column="CurrentMileage"/>
+        <result property="remainmileage" column="RemainMileage"/>
+        <result property="imageurl" column="ImageUrl"/>
+        <result property="reviewstate" column="ReviewState"/>
+        <result property="color" column="Color"/>
+        <result property="source" column="Source"/>
+        <result property="drivinglicense" column="DrivingLicense"/>
+        <result property="annualinspectioncertificate" column="AnnualInspectionCertificate"/>
+        <result property="commercialinsurancepolicy" column="CommercialInsurancePolicy"/>
+        <result property="compulsoryinsurancepolicy" column="CompulsoryInsurancePolicy"/>
+        <result property="collocation" column="collocation"/>
+    </resultMap>
+
+
+</mapper>
