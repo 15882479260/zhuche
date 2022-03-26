@@ -1,8 +1,15 @@
 package io.renren.modules.generator.controller;
 
 import java.util.Arrays;
+import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 
+import com.baomidou.mybatisplus.core.conditions.query.LambdaQueryWrapper;
+import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
+import com.baomidou.mybatisplus.core.toolkit.StringUtils;
+import com.baomidou.mybatisplus.core.toolkit.Wrappers;
+import io.renren.modules.generator.dao.CarDao;
 import org.apache.shiro.authz.annotation.RequiresPermissions;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -31,6 +38,9 @@ public class CarController {
     @Autowired
     private CarService carService;
 
+    @Autowired
+    private CarDao carDao;
+
     /**
      * 列表
      */
@@ -41,6 +51,20 @@ public class CarController {
 
         return R.ok().put("page", page);
     }
+
+
+    /**
+     * 待年检车辆列表
+     */
+    @RequestMapping("/insuranceDaysList")
+    @RequiresPermissions("generator:car:list")
+    public R insuranceDaysList(@RequestParam Map<String, Object> params){
+        PageUtils page = carService.queryInsuranceDaysCars(params);
+
+        return R.ok().put("page", page);
+    }
+
+
 
 
     /**

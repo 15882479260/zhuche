@@ -7,11 +7,11 @@
     <resultMap type="io.renren.modules.generator.entity.CarEntity" id="carMap">
         <result property="id" column="ID"/>
         <result property="carlicencenum" column="CarLicenceNum"/>
-        <result property="vehicleid" column="VehicleID"/>
+        <result property="vehicle" column="Vehicle"/>
         <result property="framenum" column="FrameNum"/>
         <result property="enginenum" column="EngineNum"/>
-        <result property="cityid" column="CityID"/>
-        <result property="storeid" column="StoreID"/>
+
+        <result property="store" column="Store"/>
         <result property="carcurrentstatus" column="CarCurrentStatus"/>
         <result property="insurancedays" column="InsuranceDays"/>
         <result property="currentmileage" column="CurrentMileage"/>

@@ -29,9 +29,9 @@ public class CarEntity implements Serializable {
 	 */
 	private String carlicencenum;
 	/**
-	 * 车型ID
+	 * 车型
 	 */
-	private Integer vehicleid;
+	private String vehicle;
 	/**
 	 * 车架号
 	 */
@@ -40,14 +40,11 @@ public class CarEntity implements Serializable {
 	 * 发动机号
 	 */
 	private String enginenum;
+
 	/**
-	 * 城市ID
+	 * 门店
 	 */
-	private Integer cityid;
-	/**
-	 * 门店ID
-	 */
-	private Integer storeid;
+	private String store;
 	/**
 	 * 运营状态
 	 */

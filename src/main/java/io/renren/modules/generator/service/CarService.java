@@ -16,5 +16,7 @@ import java.util.Map;
 public interface CarService extends IService<CarEntity> {
 
     PageUtils queryPage(Map<String, Object> params);
+
+    PageUtils queryInsuranceDaysCars(Map<String, Object> params);
 }
 
