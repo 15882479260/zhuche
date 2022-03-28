@@ -50,21 +50,21 @@ public class CarEntity implements Serializable {
 	 */
 	private String carcurrentstatus;
 	/**
-	 * 到期提醒天数
+	 * 到期提醒日期
 	 */
-	private Integer insurancedays;
+	private String insuranceday;
 	/**
 	 * 当前车辆里程数
 	 */
-	private Integer currentmileage;
+	private String currentmileage;
 	/**
 	 * 下次保养公里数
 	 */
-	private Integer remainmileage;
+	private String remainmileage;
 	/**
-	 * 车辆图片
+	 * 车型图片
 	 */
-	private String imageurl;
+	private String carmodelimg;
 	/**
 	 * 审核状态
 	 */
@@ -72,11 +72,11 @@ public class CarEntity implements Serializable {
 	/**
 	 * 车辆颜色
 	 */
-	private Integer color;
+	private String color;
 	/**
 	 * 车辆来源
 	 */
-	private Integer source;
+	private String source;
 	/**
 	 * 行驶证
 	 */

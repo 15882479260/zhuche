@@ -28,10 +28,10 @@ public class CarServiceImpl extends ServiceImpl<CarDao, CarEntity> implements Ca
 
 
     @Override
-    public PageUtils queryInsuranceDaysCars(Map<String, Object> params) {
+    public PageUtils queryInspectionPage(Map<String, Object> params) {
         IPage<CarEntity> page = this.page(
                 new Query<CarEntity>().getPage(params),
-                new QueryWrapper<CarEntity>().le( "InsuranceDays",30)
+                new QueryWrapper<CarEntity>().le( "InsuranceDay",30)
         );
 
         return new PageUtils(page);

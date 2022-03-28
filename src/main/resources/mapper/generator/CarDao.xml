@@ -16,7 +16,7 @@
         <result property="insurancedays" column="InsuranceDays"/>
         <result property="currentmileage" column="CurrentMileage"/>
         <result property="remainmileage" column="RemainMileage"/>
-        <result property="imageurl" column="ImageUrl"/>
+        <result property="carModelImg" column="CarModelImg"/>
         <result property="reviewstate" column="ReviewState"/>
         <result property="color" column="Color"/>
         <result property="source" column="Source"/>
