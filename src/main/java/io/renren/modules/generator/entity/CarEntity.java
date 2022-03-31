@@ -39,10 +39,7 @@ public class CarEntity implements Serializable {
 	 */
 	private String vehicle;
 
-	/**
-	 * 车型Id
-	 */
-	private int vehicleid;
+
 
 	/**
 	 * 车架号
