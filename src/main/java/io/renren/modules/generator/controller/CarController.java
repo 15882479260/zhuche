@@ -40,22 +40,26 @@ public class CarController {
     @RequestMapping("/list")
     @RequiresPermissions("generator:car:list")
     public R list(@RequestParam Map<String, Object> params){
-        PageUtils page = carService.queryPage(params);
+        PageUtils page ;
+       switch ((String) params.get("group")){
+           case "0":page = carService.queryPage(params);
+                    break;
+           case "1":page = carService.queryInspectionPage(params);
+                    break;
+           case "2":page = carService.queryRenewInsurancePage(params);
+                    break;
+           case "3":page = carService.queryMaintainedPage(params);
+                    break;
+           default:
+               return null;
+
+       }
+
+
 
         return R.ok().put("page", page);
     }
 
-
-    /**
-     * 待年检车辆列表
-     */
-    @RequestMapping("/inspectionList")
-    @RequiresPermissions("generator:car:list")
-    public R insuranceDaysList(@RequestParam Map<String, Object> params){
-        PageUtils page = carService.queryInspectionPage(params);
-
-        return R.ok().put("page", page);
-    }
 
 
 

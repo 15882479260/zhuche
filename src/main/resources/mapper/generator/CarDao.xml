@@ -8,9 +8,9 @@
         <result property="id" column="ID"/>
         <result property="carlicencenum" column="CarLicenceNum"/>
         <result property="vehicle" column="Vehicle"/>
+        <result property="vehicleid" column="VehicleId"/>
         <result property="framenum" column="FrameNum"/>
         <result property="enginenum" column="EngineNum"/>
-
         <result property="store" column="Store"/>
         <result property="carcurrentstatus" column="CarCurrentStatus"/>
         <result property="insurancedays" column="InsuranceDays"/>
@@ -20,10 +20,10 @@
         <result property="reviewstate" column="ReviewState"/>
         <result property="color" column="Color"/>
         <result property="source" column="Source"/>
-        <result property="drivinglicense" column="DrivingLicense"/>
-        <result property="annualinspectioncertificate" column="AnnualInspectionCertificate"/>
-        <result property="commercialinsurancepolicy" column="CommercialInsurancePolicy"/>
-        <result property="compulsoryinsurancepolicy" column="CompulsoryInsurancePolicy"/>
+        <result property="drivinglicense" column="DrivingLicense" typeHandler="com.baomidou.mybatisplus.extension.handlers.FastjsonTypeHandler"/>
+        <result property="annualinspectioncertificate" column="AnnualInspectionCertificate" typeHandler="com.baomidou.mybatisplus.extension.handlers.FastjsonTypeHandler"/>
+        <result property="commercialinsurancepolicy" column="CommercialInsurancePolicy" typeHandler="com.baomidou.mybatisplus.extension.handlers.FastjsonTypeHandler"/>
+        <result property="compulsoryinsurancepolicy" column="CompulsoryInsurancePolicy" typeHandler="com.baomidou.mybatisplus.extension.handlers.FastjsonTypeHandler" />
         <result property="collocation" column="collocation"/>
     </resultMap>
 

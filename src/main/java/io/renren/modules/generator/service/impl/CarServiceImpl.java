@@ -1,6 +1,13 @@
 package io.renren.modules.generator.service.impl;
 
+
+
 import org.springframework.stereotype.Service;
+
+
+import java.time.LocalDate;
+import java.time.format.DateTimeFormatter;
+
 import java.util.Map;
 import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
 import com.baomidou.mybatisplus.core.metadata.IPage;
@@ -13,6 +20,8 @@ import io.renren.modules.generator.entity.CarEntity;
 import io.renren.modules.generator.service.CarService;
 
 
+
+
 @Service("carService")
 public class CarServiceImpl extends ServiceImpl<CarDao, CarEntity> implements CarService {
 
@@ -23,16 +32,73 @@ public class CarServiceImpl extends ServiceImpl<CarDao, CarEntity> implements Ca
                 new QueryWrapper<CarEntity>().like(params.get("key")!=null, "CarLicenceNum",params.get("key"))
         );
 
+        page.getRecords().forEach((car)->{
+            car.setInsuranceday();
+        });
+
         return new PageUtils(page);
     }
 
 
     @Override
-    public PageUtils queryInspectionPage(Map<String, Object> params) {
+    public PageUtils queryMaintainedPage(Map<String, Object> params) {
         IPage<CarEntity> page = this.page(
                 new Query<CarEntity>().getPage(params),
-                new QueryWrapper<CarEntity>().le( "InsuranceDay",30)
+                new QueryWrapper<CarEntity>().like(params.get("key")!=null, "CarLicenceNum",params.get("key"))
+                        .apply("CurrentMileage % 5000 >=4000")
         );
+
+        page.getRecords().forEach((car)->{
+            car.setInsuranceday();
+        });
+
+        return new PageUtils(page);
+    }
+
+
+
+    @Override
+    public PageUtils queryInspectionPage(Map<String, Object> params) {
+
+        LocalDate date = LocalDate.now();
+        date= date.plusDays(30);
+        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd");
+        String queryData=date.format(formatter);
+
+        IPage<CarEntity> page = this.page(
+                new Query<CarEntity>().getPage(params),
+                new QueryWrapper<CarEntity>().like(params.get("key")!=null, "CarLicenceNum",params.get("key"))
+                        .apply("AnnualInspectionCertificate -> '$.dueDate' <'" +queryData+"'")
+        );
+
+        page.getRecords().forEach((car)->{
+            car.setInsuranceday();
+        });
+
+        return new PageUtils(page);
+    }
+
+
+
+    @Override
+    public PageUtils queryRenewInsurancePage(Map<String, Object> params) {
+
+        LocalDate date = LocalDate.now();
+        date= date.plusDays(30);
+        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd");
+        String queryData=date.format(formatter);
+
+        IPage<CarEntity> page = this.page(
+                new Query<CarEntity>().getPage(params),
+                new QueryWrapper<CarEntity>().like(params.get("key")!=null, "CarLicenceNum",params.get("key"))
+                        .apply("CommercialInsurancePolicy -> '$.dueDate' <'" +queryData+"'")
+                        .or()
+                        .apply("CompulsoryInsurancePolicy -> '$.dueDate' <'" +queryData+"'")
+        );
+
+        page.getRecords().forEach((car)->{
+            car.setInsuranceday();
+        });
 
         return new PageUtils(page);
     }

@@ -1,11 +1,17 @@
 package io.renren.modules.generator.entity;
 
+import com.alibaba.fastjson.JSONObject;
+import com.baomidou.mybatisplus.annotation.TableField;
 import com.baomidou.mybatisplus.annotation.TableId;
 import com.baomidou.mybatisplus.annotation.TableName;
 
 import java.io.Serializable;
-import java.util.Date;
+import java.time.LocalDate;
+
+
+import com.baomidou.mybatisplus.extension.handlers.FastjsonTypeHandler;
 import lombok.Data;
+
 
 /**
  * 
@@ -15,7 +21,7 @@ import lombok.Data;
  * @date 2022-03-24 14:28:54
  */
 @Data
-@TableName("tb_car")
+@TableName(value="tb_car" ,autoResultMap=true)
 public class CarEntity implements Serializable {
 	private static final long serialVersionUID = 1L;
 
@@ -32,6 +38,12 @@ public class CarEntity implements Serializable {
 	 * 车型
 	 */
 	private String vehicle;
+
+	/**
+	 * 车型Id
+	 */
+	private int vehicleid;
+
 	/**
 	 * 车架号
 	 */
@@ -80,22 +92,42 @@ public class CarEntity implements Serializable {
 	/**
 	 * 行驶证
 	 */
-	private String drivinglicense;
+	@TableField(typeHandler = FastjsonTypeHandler.class)
+	private JSONObject  drivinglicense;
 	/**
 	 * 年检证
 	 */
-	private String annualinspectioncertificate;
+	@TableField(typeHandler = FastjsonTypeHandler.class)
+	private JSONObject  annualinspectioncertificate;
 	/**
 	 * 商业险保单
 	 */
-	private String commercialinsurancepolicy;
+	@TableField(typeHandler = FastjsonTypeHandler.class)
+	private JSONObject  commercialinsurancepolicy;
 	/**
 	 * 交强险保单
 	 */
-	private String compulsoryinsurancepolicy;
+	@TableField(typeHandler = FastjsonTypeHandler.class)
+	private JSONObject compulsoryinsurancepolicy;
 	/**
 	 * 配置信息
 	 */
 	private String collocation;
+
+
+	public void setInsuranceday(){
+		String dueDateStr1= commercialinsurancepolicy.getString("dueDate");
+		String dueDateStr2= compulsoryinsurancepolicy.getString("dueDate");
+		LocalDate dueDate1=LocalDate.parse(dueDateStr1);
+		LocalDate  dueDate2=LocalDate.parse(dueDateStr2);
+		long dayse=0;
+		if(dueDate1.isBefore(dueDate2)){//dueDate1 更小
+			dayse = dueDate1.toEpochDay() - LocalDate.now().toEpochDay();
+
+		}else {
+			dayse = dueDate2.toEpochDay() - LocalDate.now().toEpochDay();
+		}
+		insuranceday=String.valueOf(dayse);
+	}
 
 }
