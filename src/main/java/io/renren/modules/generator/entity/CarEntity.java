@@ -7,6 +7,7 @@ import com.baomidou.mybatisplus.annotation.TableName;
 
 import java.io.Serializable;
 import java.time.LocalDate;
+import java.util.List;
 
 
 import com.baomidou.mybatisplus.extension.handlers.FastjsonTypeHandler;
@@ -37,7 +38,8 @@ public class CarEntity implements Serializable {
 	/**
 	 * 车型
 	 */
-	private String vehicle;
+	@TableField(typeHandler = FastjsonTypeHandler.class)
+	private JSONObject vehicle;
 
 
 
@@ -109,7 +111,8 @@ public class CarEntity implements Serializable {
 	/**
 	 * 配置信息
 	 */
-	private String collocation;
+	@TableField(typeHandler = FastjsonTypeHandler.class)
+	private List<String> collocation;
 
 
 	public void setInsuranceday(){

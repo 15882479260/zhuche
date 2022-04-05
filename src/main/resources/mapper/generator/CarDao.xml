@@ -7,7 +7,7 @@
     <resultMap type="io.renren.modules.generator.entity.CarEntity" id="carMap">
         <result property="id" column="ID"/>
         <result property="carlicencenum" column="CarLicenceNum"/>
-        <result property="vehicle" column="Vehicle"/>
+        <result property="vehicle" column="Vehicle" typeHandler="com.baomidou.mybatisplus.extension.handlers.FastjsonTypeHandler"/>
         <result property="framenum" column="FrameNum"/>
         <result property="enginenum" column="EngineNum"/>
         <result property="store" column="Store"/>
@@ -23,7 +23,7 @@
         <result property="annualinspectioncertificate" column="AnnualInspectionCertificate" typeHandler="com.baomidou.mybatisplus.extension.handlers.FastjsonTypeHandler"/>
         <result property="commercialinsurancepolicy" column="CommercialInsurancePolicy" typeHandler="com.baomidou.mybatisplus.extension.handlers.FastjsonTypeHandler"/>
         <result property="compulsoryinsurancepolicy" column="CompulsoryInsurancePolicy" typeHandler="com.baomidou.mybatisplus.extension.handlers.FastjsonTypeHandler" />
-        <result property="collocation" column="collocation"/>
+        <result property="collocation" column="collocation" typeHandler="com.baomidou.mybatisplus.extension.handlers.FastjsonTypeHandler" />
     </resultMap>
 
 
