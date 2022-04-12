@@ -41,8 +41,6 @@ public class CarEntity implements Serializable {
 	@TableField(typeHandler = FastjsonTypeHandler.class)
 	private JSONObject vehicle;
 
-
-
 	/**
 	 * 车架号
 	 */
@@ -72,10 +70,7 @@ public class CarEntity implements Serializable {
 	 * 下次保养公里数
 	 */
 	private String remainmileage;
-	/**
-	 * 车型图片
-	 */
-	private String carmodelimg;
+
 	/**
 	 * 审核状态
 	 */
