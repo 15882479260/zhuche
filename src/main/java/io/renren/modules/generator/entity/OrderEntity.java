@@ -85,4 +85,5 @@ public class OrderEntity implements Serializable {
 	@TableField(typeHandler = FastjsonTypeHandler.class)
 	private JSONArray payinfolist;
 
+
 }
