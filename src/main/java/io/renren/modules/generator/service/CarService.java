@@ -23,5 +23,9 @@ public interface CarService extends IService<CarEntity> {
     PageUtils queryRenewInsurancePage(Map<String, Object> params);
 
     PageUtils  queryMaintainedPage(Map<String, Object> params);
+
+    PageUtils groupVehicleByStore(Map<String, Object> params);
+
+    PageUtils groupCarByVehiclefullname(Map<String, Object> params);
 }
 

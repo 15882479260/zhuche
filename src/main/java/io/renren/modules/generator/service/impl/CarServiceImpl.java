@@ -1,7 +1,6 @@
 package io.renren.modules.generator.service.impl;
 
 
-
 import org.springframework.stereotype.Service;
 
 
@@ -18,6 +17,7 @@ import io.renren.common.utils.Query;
 import io.renren.modules.generator.dao.CarDao;
 import io.renren.modules.generator.entity.CarEntity;
 import io.renren.modules.generator.service.CarService;
+
 
 
 
@@ -54,7 +54,6 @@ public class CarServiceImpl extends ServiceImpl<CarDao, CarEntity> implements Ca
 
         return new PageUtils(page);
     }
-
 
 
     @Override
@@ -103,4 +102,29 @@ public class CarServiceImpl extends ServiceImpl<CarDao, CarEntity> implements Ca
         return new PageUtils(page);
     }
 
+    public PageUtils groupVehicleByStore(Map<String, Object> params) {
+
+        QueryWrapper<CarEntity> queryWrapper = new QueryWrapper<CarEntity>();
+
+        IPage<CarEntity> page = this.page(
+                new Query<CarEntity>().getPage(params),
+                queryWrapper
+                        .apply("Store -> '$.id' = "+params.get("storeId")+"")
+                        .groupBy("vehiclefullname")
+        );
+
+        return new PageUtils(page);
+    }
+
+    public PageUtils groupCarByVehiclefullname(Map<String, Object> params) {
+
+        QueryWrapper<CarEntity> queryWrapper = new QueryWrapper<CarEntity>();
+
+        IPage<CarEntity> page = this.page(
+                new Query<CarEntity>().getPage(params),
+                queryWrapper.eq(params.get("vehiclefullname")!=null&&!params.get("vehiclefullname").equals(""),"vehiclefullname",params.get("vehiclefullname"))
+        );
+
+        return new PageUtils(page);
+    }
 }

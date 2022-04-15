@@ -59,7 +59,28 @@ public class CarController {
     }
 
 
+    /**
+     * 门店车辆分组列表
+     */
+    @RequestMapping("/grouplist")
+    @RequiresPermissions("generator:car:grouplist")
+    public R grouplist(@RequestParam Map<String, Object> params){
+        PageUtils page = carService.groupVehicleByStore(params);
 
+        return R.ok().put("page", page);
+    }
+
+
+    /**
+     * 根据车型全名获取car列表
+     */
+    @RequestMapping("/groupcarlist")
+    @RequiresPermissions("generator:car:grouplist")
+    public R carlistByVehiclefullname(@RequestParam Map<String, Object> params){
+        PageUtils page = carService.groupCarByVehiclefullname(params);
+
+        return R.ok().put("page", page);
+    }
 
 
     /**
@@ -80,8 +101,8 @@ public class CarController {
     @RequiresPermissions("generator:car:save")
     public R save(@RequestBody CarEntity car){
 
+        car.setVehiclefullname();
 		carService.save(car);
-
         return R.ok();
     }
 
@@ -91,6 +112,8 @@ public class CarController {
     @RequestMapping("/update")
     @RequiresPermissions("generator:car:update")
     public R update(@RequestBody CarEntity car){
+
+        car.setVehiclefullname();
 		carService.updateById(car);
 
         return R.ok();

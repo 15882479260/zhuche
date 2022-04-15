@@ -8,19 +8,19 @@ import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
 import io.renren.common.utils.PageUtils;
 import io.renren.common.utils.Query;
 
-import io.renren.modules.generator.dao.OrderDao;
-import io.renren.modules.generator.entity.OrderEntity;
-import io.renren.modules.generator.service.OrderService;
+import io.renren.modules.generator.dao.DriverDao;
+import io.renren.modules.generator.entity.DriverEntity;
+import io.renren.modules.generator.service.DriverService;
 
 
-@Service("orderService")
-public class OrderServiceImpl extends ServiceImpl<OrderDao, OrderEntity> implements OrderService {
+@Service("driverService")
+public class DriverServiceImpl extends ServiceImpl<DriverDao, DriverEntity> implements DriverService {
 
     @Override
     public PageUtils queryPage(Map<String, Object> params) {
-        IPage<OrderEntity> page = this.page(
-                new Query<OrderEntity>().getPage(params),
-                new QueryWrapper<>()
+        IPage<DriverEntity> page = this.page(
+                new Query<DriverEntity>().getPage(params),
+                new QueryWrapper<DriverEntity>()
         );
 
         return new PageUtils(page);

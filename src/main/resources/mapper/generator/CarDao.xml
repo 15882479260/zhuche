@@ -8,9 +8,10 @@
         <result property="id" column="ID"/>
         <result property="carlicencenum" column="CarLicenceNum"/>
         <result property="vehicle" column="Vehicle" typeHandler="com.baomidou.mybatisplus.extension.handlers.FastjsonTypeHandler"/>
+        <result property="vehiclefullname" column="vehiclefullname"/>
         <result property="framenum" column="FrameNum"/>
         <result property="enginenum" column="EngineNum"/>
-        <result property="store" column="Store"/>
+        <result property="store" column="Store" typeHandler="com.baomidou.mybatisplus.extension.handlers.FastjsonTypeHandler"/>
         <result property="carcurrentstatus" column="CarCurrentStatus"/>
         <result property="insurancedays" column="InsuranceDays"/>
         <result property="currentmileage" column="CurrentMileage"/>

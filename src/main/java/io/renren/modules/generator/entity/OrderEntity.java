@@ -58,6 +58,12 @@ public class OrderEntity implements Serializable {
 	 */
 	@TableField(typeHandler = FastjsonTypeHandler.class)
 	private JSONObject cardetail;
+
+	/**
+	 * 车型信息
+	 */
+	@TableField(typeHandler = FastjsonTypeHandler.class)
+	private JSONObject vehicledetail;
 	/**
 	 * 支付状态信息列表
 	 */

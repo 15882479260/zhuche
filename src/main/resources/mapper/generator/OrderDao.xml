@@ -10,6 +10,7 @@
         <result property="contactdetail" column="contactdetail" typeHandler="com.baomidou.mybatisplus.extension.handlers.FastjsonTypeHandler"/>
         <result property="amountdetail" column="amountdetail" typeHandler="com.baomidou.mybatisplus.extension.handlers.FastjsonTypeHandler"/>
         <result property="cardetail" column="cardetail" typeHandler="com.baomidou.mybatisplus.extension.handlers.FastjsonTypeHandler"/>
+        <result property="vehicledetail" column="vehicledetail" typeHandler="com.baomidou.mybatisplus.extension.handlers.FastjsonTypeHandler"/>
         <result property="paystatusinfos" column="payStatusInfos" typeHandler="com.baomidou.mybatisplus.extension.handlers.FastjsonTypeHandler"/>
         <result property="pickupdriverinfo" column="PickUpDriverInfo" typeHandler="com.baomidou.mybatisplus.extension.handlers.FastjsonTypeHandler"/>
         <result property="pickoffdriverinfo" column="PickOffDriverInfo" typeHandler="com.baomidou.mybatisplus.extension.handlers.FastjsonTypeHandler"/>
