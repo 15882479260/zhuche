@@ -61,17 +61,24 @@ public class OrderController {
     @RequestMapping("/save")
     @RequiresPermissions("generator:order:save")
     public R save(@RequestBody OrderEntity order) {
-        Map<String, Object> query = new HashMap<String, Object>();
-        query.put("carId", order.getCardetail().getIntValue("id"));
-        query.put("PickupTime", order.getBaseorder().getString("PickupTime"));
-        query.put("PickoffTime", order.getBaseorder().getString("PickoffTime"));
-        boolean can = orderService.canCreatOrder(query);
-        if (can) {
+
+        String BookingPickupTime =order.getBaseorder().getString("BookingPickupTime");
+        String BookingPickoffTime =order.getBaseorder().getString("BookingPickoffTime");
+        DateTimeFormatter sdf = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm");//格式化
+        String nowTime= LocalDateTime.now().format(sdf);//日期转String
+
+        if(BookingPickupTime.compareTo(nowTime)<=0||BookingPickoffTime.compareTo(BookingPickupTime)<=0){
+            return R.error(1000, "预定开始时间和结束时间须大于当前时间");
+        };
+
+        Map<String,String> result = orderService.canCreatOrder(order);
+        if (result.get("isOk").equals("true")) {
             orderService.save(order);
             return R.ok();
         } else {
-            return R.error(1000, "车辆时间冲突");
+            return R.error(1000, result.get("msg"));
         }
+
 
 
     }
@@ -92,28 +99,25 @@ public class OrderController {
     @RequestMapping("/renew")
     @RequiresPermissions("generator:order:renew")
     public R renew(@RequestBody OrderEntity order) {
-        Map<String, Object> query = new HashMap<String, Object>();
-        query.put("carId", order.getCardetail().getIntValue("id"));
-        query.put("id", order.getId());
-        String BookingPickOffTime=order.getBaseorder().getString("BookingPickOffTime");
+
+        OrderEntity oldOrder= orderService.getById(order.getId());
+
         String PickoffTime=order.getBaseorder().getString("PickoffTime");
+        String BookingPickoffTime=order.getBaseorder().getString("BookingPickoffTime");
         DateTimeFormatter sdf = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm");//格式化
         String nowTime= LocalDateTime.now().format(sdf);//日期转String
 
-        if(BookingPickOffTime.compareTo(nowTime)<=0||BookingPickOffTime.compareTo(PickoffTime)<=0){
-
-            return R.error(1000, "续租日期不能小于当前日期或预定还车日期");
+        if(PickoffTime.compareTo(nowTime)<=0||PickoffTime.compareTo(BookingPickoffTime)<=0){
+            return R.error(1000, "续租时间须大于当前时间和预定还车时间");
         };
-        query.put("BookingPickupTime", nowTime);
-        query.put("BookingPickOffTime", BookingPickOffTime);
-        boolean can = orderService.canRenewOrder(query);
-        if (can) {
-            order.getBaseorder().put("BookingPickupTime",nowTime);
-            order.getBaseorder().put("BookingPickOffTime",BookingPickOffTime);
+
+        Map<String,String> result = orderService.canRenewOrder(order,oldOrder);
+
+        if (result.get("isOk").equals("true")) {
             orderService.updateById(order);
             return R.ok();
         } else {
-            return R.error(1000, "车辆时间冲突");
+            return R.error(1000, result.get("msg"));
         }
 
     }

@@ -16,7 +16,7 @@ import java.util.Map;
 public interface OrderService extends IService<OrderEntity> {
 
     PageUtils queryPage(Map<String, Object> params);
-    boolean canCreatOrder(Map<String, Object> params);
-    boolean canRenewOrder(Map<String, Object> params);
+    Map canCreatOrder(OrderEntity order);
+    Map canRenewOrder(OrderEntity order, OrderEntity oldOrder);
 }
 
